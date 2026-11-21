@@ -1,4 +1,11 @@
 {
-    "name": "piratefy-dev",
-    "image": "piratefy"
+  "name": "piratefy-dev",
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "docker-compose.dev.yml"
+  ],
+  "service": "web",
+  "workspaceFolder": "/app",
+  "forwardPorts": [5000],
+  "shutdownAction": "stopCompose"
 }
