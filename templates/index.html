@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Piratefy</title>
+</head>
+<body>
+    <h1>Piratefy - Catálogo</h1>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Título</th>
+                <th>Álbum</th>
+                <th>Audio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cancion in canciones %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                    {% if cancion.portada_url %}
+                        <img src="{{ cancion.portada_url }}" alt="Portada" width="50" height="50">
+                    {% endif %}
+                    <div>
+                        <strong>{{ cancion.titulo }}</strong><br>
+                        <small>{{ cancion.artista }}</small>
+                    </div>
+                </td>
+                <td>{{ cancion.album or 'Sencillo' }}</td>
+                <td>
+                    <audio controls preload="none">
+                        <source src="{{ cancion.archivo_audio }}" type="audio/mpeg">
+                        Tu navegador no soporta el elemento de audio
+                    </audio>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">No hay canciones registradas en la base de datos</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

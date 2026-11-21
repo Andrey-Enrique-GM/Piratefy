@@ -1,3 +1,5 @@
+SET NAMES utf8mb4;
+
 INSERT IGNORE INTO artistas (nombre)
 VALUES
     ('los angeles azules'),
