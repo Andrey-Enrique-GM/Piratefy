@@ -23,3 +23,26 @@ class Artista:
         finally:
             connection.close()
 
+    @staticmethod
+    def get_all():
+        connection = get_db_connection()
+        try:
+            cursor = connection.cursor()
+            try:
+                sql = "SELECT id, nombre FROM artistas"
+                cursor.execute(sql)
+                rows = cursor.fetchall()
+
+                artistas = []
+                for row in rows:
+                    artistas.append(Artista(
+                        row[0],  #id
+                        row[1]   #nombre
+                    ))
+                return artistas
+            except Exception:
+                connection.rollback()
+            finally:
+                cursor.close()
+        finally:
+            connection.close()
