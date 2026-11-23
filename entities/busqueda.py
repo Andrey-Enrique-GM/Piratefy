@@ -1,4 +1,4 @@
-from persistance.db import get_connection
+from persistance.db import get_db_connection
 
 class Busqueda:
     @staticmethod
@@ -6,7 +6,7 @@ class Busqueda:
     def by_name(texto):
         if not texto or not texto.strip():
             return []
-        conexion = get_connection()
+        conexion = get_db_connection()
         try:
             with conexion.cursor() as cursor:
                 cursor.execute("""
