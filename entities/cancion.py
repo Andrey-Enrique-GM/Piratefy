@@ -31,4 +31,4 @@ class Cancion:
             "artista_id": self.artista_id,
             "album_id": self.album_id,
         }
-    
+   
