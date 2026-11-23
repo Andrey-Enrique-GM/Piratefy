@@ -1,19 +1,7 @@
 import os
-import pymysql
 from flask import Flask, render_template
+from persistence import get_db_connection
 
-
-
-def get_db_connection():
-    return pymysql.connect(
-        host=os.getenv("DB_HOST", "db"),
-        user=os.getenv("DB_USER", "piratefy"),
-        password=os.getenv("DB_PASSWORD", "1234"),
-        database=os.getenv("DB_NAME", "piratefy"),
-        port=int(os.getenv("DB_PORT", 3306)),
-        charset="utf8mb4",
-        cursorclass=pymysql.cursors.DictCursor,
-    )
 
 
 def crear_app():
@@ -53,4 +41,4 @@ def crear_app():
 app = crear_app()
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000)
