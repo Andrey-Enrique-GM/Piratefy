@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piratefy</title>
+    <title>Piratefy</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/site/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Barra de navegación superior -->
+    <header class="top-navbar">
+        <div class="nav-left">
+            <a href="/" class="brand-link">
+                <img src="{{ url_for('static', filename='images/site/piratefy_logo.png') }}" alt="Piratefy Logo" class="brand-logo-img">
+                <span class="brand-text">Piratefy</span>
+            </a>
+        </div>
+
+        <div class="nav-center">
+            <!-- Botón circular de Inicio -->
+            <button class="home-btn" title="Inicio" onclick="window.location.href='/'">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                    <path d="M13.5 1.515a3 3 0 0 0-3 0L3 5.845a2 2 0 0 0-1 1.732V21a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6h4v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7.577a2 2 0 0 0-1-1.732l-7.5-4.33z"></path>
+                </svg>
+            </button>
+
+            <!-- Barra de búsqueda -->
+            <div class="search-bar">
+                <span class="search-icon">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M10.533 1.279c-5.18 0-9.407 4.14-9.407 9.279s4.226 9.279 9.407 9.279c2.234 0 4.29-.77 5.907-2.058l4.353 4.353a1 1 0 1 0 1.414-1.414l-4.344-4.344a9.157 9.157 0 0 0 2.077-5.816c0-5.14-4.226-9.28-9.407-9.28zm-7.407 9.279c0-4.006 3.302-7.28 7.407-7.28s7.407 3.274 7.407 7.28-3.302 7.279-7.407 7.279-7.407-3.273-7.407-7.28z"></path>
+                    </svg>
+                </span>
+                <input type="text" placeholder="¿Qué quieres reproducir?" aria-label="Buscar canciones">
+                <div class="search-divider"></div>
+                <button class="browse-btn" title="Explorar">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M15 15.5c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"></path>
+                        <path d="M1.513 9.37A1 1 0 0 1 2.291 9h19.418a1 1 0 0 1 .979 1.208l-2.339 11a1 1 0 0 1-.978.792H4.63a1 1 0 0 1-.978-.792l-2.339-11a1 1 0 0 1 .201-.837zM3.525 11l1.913 9h13.123l1.913-9H3.525zM4 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4h-2V3H6v3H4V2z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            <span class="username">username</span>
+            <img src="{{ url_for('static', filename='images/users/default.png') }}" alt="Foto de perfil" class="user-avatar">
+        </div>
+    </header>
+
+    <!-- Contenedor principal -->
+    <main class="main-container">
+        <div class="catalog-card">
+            <h1 class="catalog-title">Catálogo</h1>
+
+            <table class="track-table">
+                <thead>
+                    <tr>
+                        <th class="col-index">#</th>
+                        <th class="col-title">Título</th>
+                        <th class="col-album">Álbum</th>
+                        <th class="col-audio">Audio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cancion in canciones %}
+                    <tr class="track-row">
+                        <td class="col-index">
+                            <span class="track-num">{{ loop.index }}</span>
+                            <span class="play-icon">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                    <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
+                                </svg>
+                            </span>
+                        </td>
+                        <td class="col-title">
+                            <div class="song-info">
+                                {% if cancion.portada_url %}
+                                    <img src="{{ cancion.portada_url }}" alt="Portada" class="album-cover">
+                                {% else %}
+                                    <div class="album-cover-placeholder">♪</div>
+                                {% endif %}
+                                <div class="song-meta">
+                                    <span class="song-title">{{ cancion.titulo }}</span>
+                                    <span class="song-artist">{{ cancion.artista }}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-album">{{ cancion.album or 'Sencillo' }}</td>
+                        <td class="col-audio">
+                            <audio controls preload="none" class="piratefy-audio">
+                                <source src="{{ cancion.archivo_audio }}" type="audio/mpeg">
+                                Tu navegador no soporta el elemento de audio
+                            </audio>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="empty-message">No hay canciones registradas en la base de datos</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
