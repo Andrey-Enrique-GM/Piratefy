@@ -1,8 +1,10 @@
-from persistance.db import get_db_connection
+from persistence.db import get_db_connection
+
+
 
 class Busqueda:
-    @staticmethod
 
+    @staticmethod
     def by_name(texto):
         if not texto or not texto.strip():
             return []
