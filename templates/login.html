@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piratefy</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/site/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_login.css') }}">
+</head>
+<body>
+    <header class="barra">
+        <div class="nav-left">
+            <a class="brand-link">
+                <img src="{{ url_for('static', filename='images/site/piratefy_logo.png') }}" alt="Piratefy Logo" class="brand-logo-img">
+                
+            </a>
+        </div>
+        <a class="barra-marca" href="{{ url_for('login') }}">Piratefy</a>
+        <form action="{{ url_for('entrar') }}" method="post">
+            <button type="submit">Registrarse</button>
+        </form>
+        <form action="{{ url_for('entrar') }}" method="post">
+            <button type="submit">Iniciar sesión</button>
+        </form>
+    </header>
+    <svg class="olas" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,120 C180,60 360,180 540,120 C720,60 900,180 1080,120 C1260,60 1350,100 1440,120"/>
+        <path d="M0,170 C180,110 360,230 540,170 C720,110 900,230 1080,170 C1260,110 1350,150 1440,170"/>
+        <path d="M0,220 C180,160 360,280 540,220 C720,160 900,280 1080,220 C1260,160 1350,200 1440,220"/>
+    </svg>
+
+    <main>
+        <h1>Piratefy</h1>
+        <p>Toda tu música, sin cuentas ni contraseñas.</p>
+
+        <form action="{{ url_for('entrar') }}" method="post">
+            <button type="submit">Entrar</button>
+        </form>
+    </main>
+</body>
+</html>
