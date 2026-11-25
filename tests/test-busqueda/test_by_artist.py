@@ -1,36 +1,39 @@
-import os
-import sys
 from unittest.mock import MagicMock, patch
 
-# Agrega la carpeta entities al path (../../entities)
-sys.path.insert(
-    0, os.path.join(os.path.dirname(__file__), "..", "..", "entities")
-)
-
-# Simula el módulo de base de datos para no usar una conexión real
-sys.modules["persistence"] = MagicMock()
-sys.modules["persistence.db"] = MagicMock()
-
-from busqueda import Busqueda
+from entities.busqueda import Busqueda
 
 
-def test_by_artist():
-    filas = [
-        (2, "Queen", 15),
-        (5, "Soda Stereo", 10)
-    ]
-
+def _conexion_falsa(filas):
     cursor = MagicMock()
     cursor.fetchall.return_value = filas
-
     conexion = MagicMock()
     conexion.cursor.return_value.__enter__.return_value = cursor
+    return conexion
 
-    with patch("busqueda.get_db_connection", return_value=conexion):
-        resultado = Busqueda.by_artist("Queen")
-        assert resultado == filas
-
+def test_by_artist_devuelve_resultados():
+    filas = [{"id": 1, "nombre": "Bad Bunny", "total_canciones": 3}]
+    conexion = _conexion_falsa(filas)
+    with patch("entities.busqueda.get_db_connection", return_value=conexion):
+        assert Busqueda.by_artist("bad") == filas
     conexion.close.assert_called_once()
 
-    artista_mayor = max(filas, key=lambda artista: artista[2])
-    print(f"El artista con más discos es: {artista_mayor[1]} con {artista_mayor[2]} discos")
+
+def test_by_artist_usa_el_texto_en_la_consulta():
+    conexion = _conexion_falsa([])
+    with patch("entities.busqueda.get_db_connection", return_value=conexion):
+        Busqueda.by_artist("bad")
+    cursor = conexion.cursor.return_value.__enter__.return_value
+    assert cursor.execute.call_args[0][1] == ("%bad%",)
+
+
+def test_by_artist_texto_vacio():
+    assert Busqueda.by_artist("   ") == []
+
+
+def test_by_artist_error_en_bd_devuelve_lista_vacia():
+    conexion = _conexion_falsa([])
+    cursor = conexion.cursor.return_value.__enter__.return_value
+    cursor.execute.side_effect = Exception("fallo")
+    with patch("entities.busqueda.get_db_connection", return_value=conexion):
+        assert Busqueda.by_artist("bad") == []
+    conexion.close.assert_called_once()
