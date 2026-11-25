@@ -13,10 +13,29 @@ class Busqueda:
             with conexion.cursor() as cursor:
                 cursor.execute("""
                     SELECT c.id, c.nombre, a.nombre AS artista FROM canciones c
-                    INNER JOIN  artista a ON c.artista_id = a.id
+                    INNER JOIN  artistas a ON c.artista_id = a.id
                     WHERE c.nombre LIKE %s""", 
                     (f"%{texto}%",)
                 )
+                return cursor.fetchall()
+        except Exception:
+            return []
+        finally:
+            conexion.close()
+
+    @staticmethod
+    def by_artist(texto):
+        conexion = get_db_connection()
+        try:
+            with conexion.cursor() as cursor:
+                cursor.execute("""
+                    SELECT a.id, a.nombre, COUNT(c.id) AS total_cancines 
+                    FROM artistas a
+                    LEFT JOIN canciones c ON a.id = c.artista_id
+                    GROUP BY a.id, a.nombre
+                    ORDER BY total_cancines DESC
+                    LIMIT 10
+                """)
                 return cursor.fetchall()
         except Exception:
             return []
