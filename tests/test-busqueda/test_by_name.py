@@ -1,30 +1,23 @@
-import os
-import sys
 from unittest.mock import MagicMock, patch
 
-# Agrega la carpeta entities al path (../../entities)
-sys.path.insert(
-    0, os.path.join(os.path.dirname(__file__), "..", "..", "entities")
-)
-
-# Simula el módulo de base de datos para no usar una conexión real
-sys.modules["persistence"] = MagicMock()
-sys.modules["persistence.db"] = MagicMock()
-
-from busqueda import Busqueda
+from entities.busqueda import Busqueda
 
 
-def test_texto_vacio_devuelve_lista_vacia():
-    assert Busqueda.by_name("") == []
-
-
-def test_devuelve_resultados():
-    filas = [(1, "Despacito", "Luis Fonsi")]
-
+def _conexion_falsa(filas):
     cursor = MagicMock()
     cursor.fetchall.return_value = filas
     conexion = MagicMock()
     conexion.cursor.return_value.__enter__.return_value = cursor
+    return conexion
 
-    with patch("busqueda.get_db_connection", return_value=conexion):
-        assert Busqueda.by_name("desp") == filas
+
+def test_by_name_devuelve_resultados():
+    filas = [{"id": 1, "nombre": "Querida", "artista": "X"}]
+    conexion = _conexion_falsa(filas)
+    with patch("entities.busqueda.get_db_connection", return_value=conexion):
+        assert Busqueda.by_name("quer") == filas
+    conexion.close.assert_called_once()
+
+
+def test_by_name_texto_vacio():
+    assert Busqueda.by_name("   ") == []
