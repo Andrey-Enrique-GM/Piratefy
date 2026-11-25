@@ -1,4 +1,4 @@
-from persistence.db import get_db_connection
+from persistance.db import get_db_connection
 
 
 
