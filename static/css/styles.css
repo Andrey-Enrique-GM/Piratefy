@@ -245,6 +245,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
+    table-layout: fixed;
 }
 
 .track-table thead th {
@@ -280,27 +281,60 @@ body {
     border-bottom-right-radius: 6px;
 }
 
-/* Columna # y cambio a icono Play en hover */
+/* Columna # y botón Play/Pause */
 .col-index {
-    width: 48px;
+    width: 56px;
     text-align: center;
     color: var(--text-secondary);
     font-size: 0.95rem;
 }
 
-.play-icon {
-    display: none;
-    color: var(--text-primary);
+.track-num {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 24px;
+    height: 24px;
 }
 
-.track-row:hover .track-num {
+.play-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+}
+
+.play-btn .icon-pause {
     display: none;
 }
 
-.track-row:hover .play-icon {
+.track-row:hover .track-num,
+.track-row.is-playing .track-num {
+    display: none;
+}
+
+.track-row:hover .play-btn,
+.track-row.is-playing .play-btn {
     display: inline-flex;
+}
+
+/* Estado reproduciendo actualmente */
+.track-row.is-playing .song-title {
+    color: var(--piratefy-red);
+}
+
+.track-row.is-playing .icon-play {
+    display: none;
+}
+
+.track-row.is-playing .icon-pause {
+    display: block;
 }
 
 /* Columna Título + Portada */
@@ -338,6 +372,7 @@ body {
     color: var(--text-primary);
     font-size: 0.98rem;
     font-weight: 500;
+    transition: color 0.15s ease;
 }
 
 .song-artist {
@@ -361,21 +396,58 @@ body {
     color: var(--text-primary);
 }
 
-/* Columna Audio */
-.col-audio {
-    width: 280px;
+/* Columna Guardar Canción */
+.col-save {
+    width: 64px;
+    text-align: right;
 }
 
-.piratefy-audio {
-    height: 34px;
-    width: 100%;
-    filter: invert(0.92) hue-rotate(180deg);
-    opacity: 0.85;
-    transition: opacity 0.2s ease;
+.save-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 
-.track-row:hover .piratefy-audio {
+/* Aparece el botón "+" al pasar el cursor sobre la fila */
+.track-row:hover .save-btn {
     opacity: 1;
+    pointer-events: auto;
+}
+
+.save-btn:hover {
+    color: var(--text-primary);
+    transform: scale(1.08);
+}
+
+.save-btn .icon-saved {
+    display: none;
+}
+
+/* Cuando se guarda, el círculo rojo queda visible permanentemente */
+.save-btn.is-saved {
+    opacity: 1;
+    pointer-events: auto;
+    color: var(--piratefy-red);
+}
+
+.save-btn.is-saved:hover {
+    color: var(--piratefy-red);
+}
+
+.save-btn.is-saved .icon-add {
+    display: none;
+}
+
+.save-btn.is-saved .icon-saved {
+    display: block;
 }
 
 .empty-message {
