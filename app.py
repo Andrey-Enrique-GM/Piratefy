@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, redirect, url_for, session
-from persistance import get_db_connection
+from persistence import get_db_connection
 
 
 def crear_app():

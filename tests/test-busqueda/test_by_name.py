@@ -8,8 +8,8 @@ sys.path.insert(
 )
 
 # Simula el módulo de base de datos para no usar una conexión real
-sys.modules["persistance"] = MagicMock()
-sys.modules["persistance.db"] = MagicMock()
+sys.modules["persistence"] = MagicMock()
+sys.modules["persistence.db"] = MagicMock()
 
 from busqueda import Busqueda
 
