@@ -1,16 +1,31 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, session
 from persistence import get_db_connection
-
 
 
 def crear_app():
     app = Flask(__name__)
     app.secret_key = os.getenv("SECRET_KEY", "dev_secret_key")
 
-
     @app.route("/")
+    def login():
+        return render_template("login.html")
+
+    @app.route("/entrar", methods=["POST"])
+    def entrar():
+        session["entro"] = True
+        return redirect(url_for("index"))
+
+    @app.route("/salir")
+    def salir():
+        session.clear()
+        return redirect(url_for("login"))
+
+    @app.route("/inicio")
     def index():
+        if not session.get("entro"):
+            return redirect(url_for("login"))
+
         conn = get_db_connection()
         try:
             with conn.cursor() as cursor:
