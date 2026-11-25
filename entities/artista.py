@@ -33,15 +33,10 @@ class Artista:
                 cursor.execute(sql)
                 rows = cursor.fetchall()
 
-                artistas = []
-                for row in rows:
-                    artistas.append(Artista(
-                        row[0],  #id
-                        row[1]   #nombre
-                    ))
-                return artistas
-            except Exception:
-                connection.rollback()
+                return [
+                    Artista(row["id"], row["nombre"])
+                    for row in rows
+                ]
             finally:
                 cursor.close()
         finally:
