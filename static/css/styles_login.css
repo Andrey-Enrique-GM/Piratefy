@@ -1,0 +1,345 @@
+/*login*/
+:root {
+    --mar-profundo: #07141c;
+    --mar: #0e2a38;
+    --espuma: #e9f2f3;
+    --bruma: #8fa8b0;
+    --laton: #e0a93b;
+    --laton-oscuro: #b98421;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+    font-family: "Outfit", system-ui, sans-serif;
+    color: var(--espuma);
+    background:
+        radial-gradient(ellipse at 50% 120%, var(--mar) 0%, transparent 60%),
+        var(--mar-profundo);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+.olas {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 38vh;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.olas path {
+    fill: none;
+    stroke: var(--bruma);
+    stroke-width: 1.2;
+}
+
+.olas path:nth-child(2) { opacity: 0.6; }
+.olas path:nth-child(3) { opacity: 0.3; }
+
+main {
+    position: relative;
+    text-align: center;
+    padding: 2rem;
+    max-width: 28rem;
+}
+
+h1 {
+    font-family: "Pirata One", "Georgia", serif;
+    font-weight: 400;
+    font-size: clamp(4rem, 14vw, 7rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    animation: aparecer 0.9s ease-out both;
+}
+
+p {
+    margin-top: 1rem;
+    color: var(--bruma);
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+form { margin-top: 2.5rem; }
+
+button {
+    font: inherit;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--mar-profundo);
+    background: var(--laton);
+    border: 0;
+    border-radius: 999px;
+    padding: 0.9rem 3.2rem;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+button:hover { background: var(--laton-oscuro); }
+button:active { transform: scale(0.97); }
+
+button:focus-visible {
+    outline: 3px solid var(--espuma);
+    outline-offset: 4px;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    h1 { animation: none; }
+    button { transition: none; }
+}/*login*/
+:root {
+    --mar-profundo: #07141c;
+    --mar: #0e2a38;
+    --espuma: #e9f2f3;
+    --bruma: #8fa8b0;
+    --laton: #ffffff;
+    --laton-oscuro: #b92621;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+    font-family: "Outfit", system-ui, sans-serif;
+    color: var(--espuma);
+    background:
+        radial-gradient(ellipse at 50% 120%, var(--mar) 0%, transparent 60%),
+        var(--mar-profundo);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+.olas {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 38vh;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.olas path {
+    fill: none;
+    stroke: var(--bruma);
+    stroke-width: 1.2;
+}
+
+.olas path:nth-child(2) { opacity: 0.6; }
+.olas path:nth-child(3) { opacity: 0.3; }
+
+main {
+    position: relative;
+    text-align: center;
+    padding: 2rem;
+    max-width: 28rem;
+}
+
+h1 {
+    font-family: "Pirata One", "Georgia", serif;
+    font-weight: 400;
+    font-size: clamp(4rem, 14vw, 7rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    animation: aparecer 0.9s ease-out both;
+}
+
+p {
+    margin-top: 1rem;
+    color: var(--bruma);
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+form { margin-top: 2.5rem; }
+
+button {
+    font: inherit;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--mar-profundo);
+    background: var(--laton);
+    border: 0;
+    border-radius: 999px;
+    padding: 0.9rem 3.2rem;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+button:hover { background: var(--laton-oscuro); }
+button:active { transform: scale(0.97); }
+
+button:focus-visible {
+    outline: 3px solid var(--espuma);
+    outline-offset: 4px;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    h1 { animation: none; }
+    button { transition: none; }
+}
+/**/
+.barra {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 2rem;
+    background: rgba(7, 20, 28, 0.8);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(143, 168, 176, 0.2);
+}
+
+.barra-marca {
+    font-family: "Pirata One", "Georgia", serif;
+    font-size: 1.8rem;
+    color: var(--espuma);
+    text-decoration: none;
+}
+
+.barra form { margin: 0; }
+
+.barra button {
+    padding: 0.5rem 1.4rem;
+    font-size: 0.95rem;
+    color: var(--laton);
+    background: transparent;
+    border: 1px solid var(--laton);
+}
+
+.barra button:hover {
+    background: var(--laton);
+    color: var(--mar-profundo);
+}
+.barra {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    padding: 0.9rem 2rem;
+    background: rgba(7, 20, 28, 0.8);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(143, 168, 176, 0.2);
+}
+
+.barra-marca {
+    margin-right: auto;
+    font-family: "Pirata One", "Georgia", serif;
+    font-size: 1.8rem;
+    color: var(--espuma);
+    text-decoration: none;
+}
+/**/
+.barra button:hover,
+.barra button:focus-visible,
+.barra button:active {
+    background: #d62839;
+    border-color: #d62839;
+    color: #ffffff;
+}
+.barra button {
+    background: transparent;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    color: var(--espuma);
+    transition: color 0.15s ease;
+}
+
+.barra button:hover,
+.barra button:focus-visible,
+.barra button:active {
+    background: transparent;
+    color: #e53131;
+}
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.top-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    padding: 8px 16px;
+    background-color: var(--bg-base);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* Esquina superior izquierda */
+.nav-left {
+    display: flex;
+    align-items: center;
+    min-width: 180px;
+}
+
+/* Contenedor enlace de logo + título */
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Imagen del logo */
+.brand-logo-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: filter 0.25s ease, transform 0.2s ease;
+}
+
+/* "Piratefy" */
+.brand-text {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+/* Hover sincronizado en el contenedor padre (.brand-link) */
+.brand-link:hover .brand-logo-img {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 8px rgba(229, 49, 49, 0.85));
+}
+
+.brand-link:hover .brand-text {
+    color: var(--piratefy-red);
+    text-shadow: 0 0 12px rgba(229, 49, 49, 0.7);
+}
