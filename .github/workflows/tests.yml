@@ -9,5 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -t piratefy .
-      - run: docker run --rm piratefy python -m pytest -v || [ $? -eq 5 ]
+
+      - name: Crear .env de prueba
+        run: cp .env.example .env
+
+      - name: Levantar MySQL y la app
+        run: docker compose up -d --build --wait
+
+      - name: Correr las pruebas contra la base real
+        run: docker compose exec -T web python -m pytest -v || [ $? -eq 5 ]
+
+      - name: Ver logs si algo falló
+        if: failure()
+        run: docker compose logs
+
+      - name: Apagar y borrar la base de prueba
+        if: always()
+        run: docker compose down -v
