@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#090909">
+    <title>Artistas | Piratefy</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/site/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_artistas.css') }}">
+</head>
+<body>
+    <div class="artists-page">
+        <header class="artists-header">
+            <a class="brand" href="#" aria-label="Piratefy">
+                <img src="{{ url_for('static', filename='images/site/piratefy_logo.png') }}" alt="" class="brand-logo">
+                <span>Piratefy</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Navegación principal">
+                <a class="nav-link" href="#biblioteca">Biblioteca</a>
+                <a class="nav-link nav-link-active" href="#artistas" aria-current="page">Artistas</a>
+                <a class="nav-link" href="#albumes">Álbumes</a>
+            </nav>
+
+            <div class="profile-chip" aria-label="Perfil de ejemplo">
+                <span class="profile-avatar" aria-hidden="true">P</span>
+                <span class="profile-name">Perfil</span>
+            </article>
+        </header>
+
+        <main class="artists-main" id="artistas">
+            <section class="artists-intro" aria-labelledby="page-title">
+                <p class="eyebrow">TU MÚSICA, TUS DESCUBRIMIENTOS</p>
+                <h1 id="page-title">Artistas</h1>
+                <p class="intro-copy">Explora los sonidos y las historias detrás de tu música.</p>
+            </section>
+
+            <section class="artist-grid" aria-label="Artistas destacados">
+                {% for artista in artistas %}
+                    <article class="artist-card">
+                        <div class="artist-art art-{{ ['coral', 'blue', 'gold', 'violet', 'green', 'pink'][(loop.index0) % 6] }}" aria-hidden="true">
+                            <span>{{ artista.nombre[:2]|upper }}</span>
+                        </div>
+                        <div class="artist-info">
+                            <h2>{{ artista.nombre }}</h2>
+                            <p>Artista</p>
+                        </div>
+                        <span class="card-arrow" aria-hidden="true">↗</span>
+                    </article>
+                {% else %}
+                    <p class="prototype-note">Aún no hay artistas registrados.</p>
+                {% endfor %}
+            </section>
+        </main>
+    </div>
+</body>
+</html>
