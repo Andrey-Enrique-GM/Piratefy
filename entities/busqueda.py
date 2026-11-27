@@ -1,7 +1,5 @@
 from persistence.db import get_db_connection
 
-
-
 class Busqueda:
 
     @staticmethod
