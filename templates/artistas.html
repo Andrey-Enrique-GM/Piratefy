@@ -11,28 +11,36 @@
 <body>
     <div class="artists-page">
         <header class="artists-header">
-            <a class="brand" href="#" aria-label="Piratefy">
-                <img src="{{ url_for('static', filename='images/site/piratefy_logo.png') }}" alt="" class="brand-logo">
-                <span>Piratefy</span>
+            <a class="brand-link" href="{{ url_for('index') }}" aria-label="Piratefy">
+                <img src="{{ url_for('static', filename='images/site/piratefy_logo.png') }}" alt="Piratefy Logo" class="brand-logo-img">
+                <span class="brand-text">Piratefy</span>
             </a>
 
-            <nav class="main-nav" aria-label="Navegación principal">
-                <a class="nav-link" href="#biblioteca">Biblioteca</a>
-                <a class="nav-link nav-link-active" href="#artistas" aria-current="page">Artistas</a>
-                <a class="nav-link" href="#albumes">Álbumes</a>
-            </nav>
-
-            <div class="profile-chip" aria-label="Perfil de ejemplo">
-                <span class="profile-avatar" aria-hidden="true">P</span>
-                <span class="profile-name">Perfil</span>
-            </article>
+            <div class="nav-right">
+                <span class="username">username</span>
+                <img src="{{ url_for('static', filename='images/users/default.png') }}" alt="Foto de perfil" class="user-avatar">
+            </div>
         </header>
 
         <main class="artists-main" id="artistas">
             <section class="artists-intro" aria-labelledby="page-title">
                 <p class="eyebrow">TU MÚSICA, TUS DESCUBRIMIENTOS</p>
                 <h1 id="page-title">Artistas</h1>
-                <p class="intro-copy">Explora los sonidos y las historias detrás de tu música.</p>
+                <p class="intro-copy">Descubre nuestro catálogo de artistas.</p>
+
+                <details class="artist-add">
+                    <summary class="artist-add-toggle">
+                        <span aria-hidden="true">+</span>
+                        Agregar artista
+                    </summary>
+                    <div class="artist-add-menu">
+                        <form class="artist-add-fields" id="artist-form">
+                            <label for="artist-name">Nombre del artista</label>
+                            <input id="artist-name" type="text" maxlength="100" placeholder="Escribe el nombre" autocomplete="off" required>
+                            <button class="artist-add-save" type="submit">Guardar</button>
+                        </form>
+                    </div>
+                </details>
             </section>
 
             <section class="artist-grid" aria-label="Artistas destacados">
@@ -53,5 +61,6 @@
             </section>
         </main>
     </div>
+    <script src="{{ url_for('static', filename='js/artistas.js') }}"></script>
 </body>
 </html>

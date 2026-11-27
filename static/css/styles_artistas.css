@@ -44,67 +44,69 @@ body {
     backdrop-filter: blur(16px);
 }
 
-.brand {
-    display: inline-flex;
+.brand-link {
+    display: flex;
     flex: 0 0 190px;
     align-items: center;
     gap: 10px;
-    color: var(--artists-text);
-    font-size: 1.4rem;
-    font-weight: 800;
-    letter-spacing: -0.04em;
     text-decoration: none;
+    cursor: pointer;
 }
 
-.brand-logo {
-    width: 38px;
-    height: 38px;
+.brand-logo-img {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     object-fit: cover;
+    transition: filter 0.25s ease, transform 0.2s ease;
 }
 
-.main-nav {
+.brand-text {
+    color: var(--artists-text);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.brand-link:hover .brand-logo-img {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 8px rgba(229, 49, 49, 0.85));
+}
+
+.brand-link:hover .brand-text {
+    color: var(--artists-accent);
+    text-shadow: 0 0 12px rgba(229, 49, 49, 0.7);
+}
+
+.nav-right {
     display: flex;
     align-items: center;
-    gap: 8px;
-}
-
-.nav-link {
-    padding: 10px 14px;
-    border-radius: 999px;
-    color: var(--artists-muted);
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 160ms ease, color 160ms ease;
-}
-
-.nav-link:hover,
-.nav-link-active {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--artists-text);
-}
-
-.profile-chip {
-    display: inline-flex;
-    flex: 0 0 190px;
-    align-items: center;
     justify-content: flex-end;
-    gap: 10px;
-    color: var(--artists-text);
-    font-size: 0.88rem;
-    font-weight: 600;
+    gap: 12px;
+    min-width: 180px;
 }
 
-.profile-avatar {
-    display: grid;
-    width: 34px;
-    height: 34px;
-    place-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.16);
+.username {
+    color: var(--artists-text);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: #262626;
-    color: #fff;
+    object-fit: cover;
+    background-color: #1f1f1f;
+    border: 3px solid #1f1f1f;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.2s ease;
+}
+
+.user-avatar:hover {
+    transform: scale(1.05);
+    border-color: #2a2a2a;
 }
 
 .artists-main {
@@ -138,6 +140,85 @@ body {
     color: var(--artists-muted);
     font-size: 1rem;
     line-height: 1.6;
+}
+
+.artist-add {
+    max-width: 420px;
+    margin-top: 24px;
+}
+
+.artist-add-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 16px;
+    border-radius: 999px;
+    background: var(--artists-accent);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+}
+
+.artist-add-toggle::-webkit-details-marker {
+    display: none;
+}
+
+.artist-add-toggle:hover {
+    background: #c92525;
+}
+
+.artist-add-menu {
+    margin-top: 12px;
+    padding: 20px;
+    border: 1px solid var(--artists-line);
+    border-radius: 12px;
+    background: var(--artists-panel);
+}
+
+.artist-add-fields {
+    display: grid;
+    gap: 10px;
+}
+
+.artist-add-fields label {
+    color: var(--artists-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.artist-add-fields input {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--artists-line);
+    border-radius: 8px;
+    outline: none;
+    background: var(--artists-bg);
+    color: var(--artists-text);
+    font: inherit;
+}
+
+.artist-add-fields input:focus {
+    border-color: var(--artists-accent);
+}
+
+.artist-add-save {
+    justify-self: start;
+    margin-top: 4px;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 8px;
+    background: #292929;
+    color: var(--artists-text);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.artist-add-save:hover {
+    background: #383838;
 }
 
 .artist-grid {
@@ -254,21 +335,17 @@ body {
         padding-inline: 20px;
     }
 
-    .brand,
-    .profile-chip {
+    .brand-link,
+    .nav-right {
         flex-basis: auto;
     }
 
-    .main-nav {
-        gap: 0;
+    .nav-right {
+        min-width: auto;
+        gap: 8px;
     }
 
-    .nav-link {
-        padding: 9px 10px;
-        font-size: 0.82rem;
-    }
-
-    .profile-name {
+    .username {
         display: none;
     }
 
@@ -282,18 +359,13 @@ body {
         min-height: 64px;
     }
 
-    .brand {
-        gap: 8px;
-        font-size: 1.15rem;
+    .brand-link {
+        gap: 10px;
     }
 
-    .brand-logo {
-        width: 32px;
-        height: 32px;
-    }
-
-    .main-nav .nav-link:not(.nav-link-active) {
-        display: none;
+    .brand-logo-img {
+        width: 36px;
+        height: 36px;
     }
 
     .artists-main {

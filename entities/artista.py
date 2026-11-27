@@ -18,6 +18,7 @@ class Artista:
                 return nuevo_id
             except Exception:
                 connection.rollback()
+                raise
             finally:
                 cursor.close()
         finally:
