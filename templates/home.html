@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piratefy</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/site/favicon.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_home.css') }}">
 </head>
 <body>
     <header class="barra">
@@ -31,7 +31,7 @@
 
     <main>
         <h1>Piratefy</h1>
-        <p>Toda tu música, sin cuentas ni contraseñas.</p>
+        <p>Toda tu música, sin anuncios y suscripciones.</p>
 
         <form action="{{ url_for('entrar') }}" method="post">
             <button type="submit">Entrar</button>

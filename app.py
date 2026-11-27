@@ -9,7 +9,7 @@ def crear_app():
 
     @app.route("/")
     def login():
-        return render_template("login.html")
+        return render_template("home.html")
 
     @app.route("/entrar", methods=["POST"])
     def entrar():
@@ -19,12 +19,12 @@ def crear_app():
     @app.route("/salir")
     def salir():
         session.clear()
-        return redirect(url_for("login"))
+        return redirect(url_for("home"))
 
     @app.route("/inicio")
     def index():
         if not session.get("entro"):
-            return redirect(url_for("login"))
+            return redirect(url_for("home"))
 
         conn = get_db_connection()
         try:
