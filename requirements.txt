@@ -4,3 +4,4 @@ PyMySQL==1.1.1
 pytest==8.4.2
 gunicorn
 cryptography
+Flask-Login==0.6.3

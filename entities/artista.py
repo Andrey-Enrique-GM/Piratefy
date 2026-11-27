@@ -1,25 +1,43 @@
-from dataclasses import dataclass
-from typing import Optional
+from persistence import get_db_connection
 
-
-
-@dataclass
 class Artista:
-    nombre: str
-    id: Optional[int] = None
+    def __init__(self, id, nombre):
+        self.id = id
+        self.nombre = nombre
 
+    @staticmethod
+    def save(nombre):
+        connection = get_db_connection()
+        try:
+            cursor = connection.cursor()
+            try:
+                sql = "INSERT INTO artistas (nombre) VALUES (%s)"
+                cursor.execute(sql, (nombre,))
+                nuevo_id = cursor.lastrowid
+                connection.commit()
+                return nuevo_id
+            except Exception:
+                connection.rollback()
+            finally:
+                cursor.close()
+        finally:
+            connection.close()
 
-    @classmethod
-    def from_row(cls, row: dict) -> "Artista":
-        return cls(
-            id=row.get("id"),
-            nombre=row["nombre"],
-        )
+    @staticmethod
+    def get_all():
+        connection = get_db_connection()
+        try:
+            cursor = connection.cursor()
+            try:
+                sql = "SELECT id, nombre FROM artistas"
+                cursor.execute(sql)
+                rows = cursor.fetchall()
 
-
-    def to_dict(self) -> dict:
-        return {
-            "id": self.id,
-            "nombre": self.nombre,
-        }
-    
+                return [
+                    Artista(row["id"], row["nombre"])
+                    for row in rows
+                ]
+            finally:
+                cursor.close()
+        finally:
+            connection.close()
