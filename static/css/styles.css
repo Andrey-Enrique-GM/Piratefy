@@ -81,7 +81,14 @@ body {
     filter: drop-shadow(0 0 8px rgba(229, 49, 49, 0.85));
 }
 
+.brand-fy{
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
 .brand-link:hover .brand-text {
+    
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+}
+.brand-link:hover .brand-fy {
     color: var(--piratefy-red);
     text-shadow: 0 0 12px rgba(229, 49, 49, 0.7);
 }
