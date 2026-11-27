@@ -49,6 +49,10 @@ def crear_app():
             conn.close()
 
         return render_template("index.html", canciones=canciones)
+    
+    @app.route("/buscar")
+    def buscar():
+        return render_template("search.html")
 
     return app
 
