@@ -66,12 +66,21 @@ body {
     transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 
+/* "fy" de Piratefy: blanco normal, rojo neón al pasar el cursor */
+.brand-fy {
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
 .brand-link:hover .brand-logo-img {
     transform: scale(1.06);
     filter: drop-shadow(0 0 8px rgba(229, 49, 49, 0.85));
 }
 
 .brand-link:hover .brand-text {
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+.brand-link:hover .brand-fy {
     color: var(--piratefy-red);
     text-shadow: 0 0 12px rgba(229, 49, 49, 0.7);
 }
@@ -83,7 +92,9 @@ body {
     justify-content: center;
     align-items: flex-start;
     padding: 32px 16px 48px;
-    background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-base) 70%);
+    background:
+        radial-gradient(ellipse 60% 45% at 50% 38%, rgba(229, 49, 49, 0.14), transparent 70%),
+        var(--bg-base);
 }
 
 .signin-card {
@@ -93,6 +104,8 @@ body {
     border-radius: 8px;
     padding: 40px 48px;
     text-align: center;
+    border: 1px solid rgba(229, 49, 49, 0.15);
+    box-shadow: 0 0 40px rgba(229, 49, 49, 0.12);
 }
 
 .signin-logo {
@@ -101,6 +114,7 @@ body {
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 16px;
+    filter: drop-shadow(0 0 18px rgba(229, 49, 49, 0.45));
 }
 
 .signin-title {
@@ -145,8 +159,18 @@ body {
 
 .signin-field input:focus {
     outline: none;
-    border-color: var(--text-primary);
-    box-shadow: 0 0 0 1px var(--text-primary);
+    border-color: var(--piratefy-red);
+    box-shadow: 0 2px 14px rgba(229, 49, 49, 0.25);
+}
+
+/* Evita que el autocompletado del navegador ponga el campo en blanco */
+.signin-field input:-webkit-autofill,
+.signin-field input:-webkit-autofill:hover,
+.signin-field input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text-primary);
+    caret-color: var(--text-primary);
+    -webkit-box-shadow: 0 0 0 1000px var(--bg-elevated) inset;
+    transition: background-color 9999s ease-in-out 0s;
 }
 
 .signin-btn {
@@ -161,12 +185,14 @@ body {
     border: none;
     border-radius: 500px;
     cursor: pointer;
-    transition: transform 0.15s ease, filter 0.2s ease;
+    box-shadow: 0 2px 14px rgba(229, 49, 49, 0.25);
+    transition: transform 0.15s ease, filter 0.2s ease, box-shadow 0.2s ease;
 }
 
 .signin-btn:hover {
     transform: scale(1.04);
     filter: brightness(1.1);
+    box-shadow: 0 0 24px rgba(229, 49, 49, 0.55);
 }
 
 .signin-btn:active {
@@ -204,11 +230,18 @@ body {
     transition: color 0.2s ease;
 }
 
-.signin-footer a:hover {
+.signin-footer a:hover .brand-fy {
     color: var(--piratefy-red);
+    text-shadow: 0 0 12px rgba(229, 49, 49, 0.7);
 }
 
-/* Pantallas chicas */
+/* "fy" del título siempre en rojo neón (igual que el título de search.html) */
+.signin-title .brand-fy {
+    color: var(--piratefy-red);
+    text-shadow: 0 0 24px rgba(229, 49, 49, 0.55);
+}
+
+
 @media (max-width: 480px) {
     .signin-container {
         padding: 0;
