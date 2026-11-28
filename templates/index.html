@@ -44,7 +44,10 @@
         </div>
 
         <div class="nav-right">
-            <span class="username">username</span>
+            <a href="{{ url_for('home') }}" style="background-color: var(--piratefy-red); color: #fff; text-decoration: none; padding: 8px 16px; border-radius: 500px; font-weight: 700; font-size: 0.85rem;">
+                Panel Admin
+            </a>
+            <span class="username">admin</span>
             <img src="{{ url_for('static', filename='images/users/default.png') }}" alt="Foto de perfil" class="user-avatar">
         </div>
     </header>
