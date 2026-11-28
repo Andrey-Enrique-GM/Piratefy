@@ -7,7 +7,8 @@ VALUES
     ('C tangana'),
     ('José José'),
     ('Luis Miguel'),
-    ('Juan Gabriel');
+    ('Juan Gabriel'),
+    ('Ado');
 
 INSERT IGNORE INTO albumes (nombre, artista_id, portada_url)
 VALUES
@@ -16,7 +17,8 @@ VALUES
     ('Madrileño', 3, '/static/covers/madrileño.webp'),
     ('40 y 20', 4, '/static/covers/40y20.webp'),
     ('Romance', 5, '/static/covers/romance.webp'),
-    ('Recuerdos, Vol. II', 6, '/static/covers/recuerdos2.webp');
+    ('Recuerdos, Vol. II', 6, '/static/covers/recuerdos2.webp'),
+    ("Ado's Best Adobum", 7, '/static/covers/ados-best-adobum.webp');
 
 INSERT IGNORE INTO canciones (nombre, archivo_audio, artista_id, album_id)
 VALUES
@@ -31,4 +33,8 @@ VALUES
     ('La Mentira', '/static/audio/la-mentira.mp3', 5, 5),
     ('Mucho Corazón', '/static/audio/mucho-corazon.mp3', 5, 5),
     ('Querida', '/static/audio/querida.mp3', 6, 6),
-    ('Bésame', '/static/audio/besame.mp3', 6, 6);
+    ('Bésame', '/static/audio/besame.mp3', 6, 6),
+    ('Usseewa', '/static/audio/usseewa.mp3', 7, 7),
+    ('Aishite Aishite Aishite', '/static/audio/aishite-aishite-aishite.mp3', 7, 7),
+    ('Show', '/static/audio/show.mp3', 7, 7),
+    ('Odoru Ponpokorin', '/static/audio/odoru-ponpokorin.mp3', 7, 7);
