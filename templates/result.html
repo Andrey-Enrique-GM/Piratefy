@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piratefy</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/site/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_search.css') }}">
+</head>
+<body>
+    <header class="top-navbar">
+        <div class="nav-left">
+            <a href="{{ url_for('buscador') }}" class="brand-link">
+                <img src="{{ url_for('static', filename='images/site/piratefy_logo.png') }}" alt="Piratefy Logo" class="brand-logo-img">
+                <span class="brand-text">Pirate<span class="brand-fy">fy</span></span>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="{{ url_for('buscador') }}" class="top-link">Nueva búsqueda</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="catalog-card">
+            <h1 class="catalog-title">
+                {% if tipo == 'top' %}Top artistas
+                {% elif tipo == 'aleatorio' %}Canción aleatoria
+                {% elif tipo == 'artista' %}Artistas: “{{ texto }}”
+                {% else %}Canciones: “{{ texto }}”{% endif %}
+            </h1>
+
+            {% if not resultados %}
+                <p class="empty-message">
+                    {% if tipo in ('nombre', 'artista') and not texto %}Escribe algo para buscar.
+                    {% else %}No se encontraron resultados.{% endif %}
+                </p>
+
+            {% elif tipo in ('artista', 'top') %}
+                <table class="track-table">
+                    <thead>
+                        <tr>
+                            <th class="col-index">#</th>
+                            <th class="col-title">Artista</th>
+                            <th class="col-album">Canciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for artista in resultados %}
+                        <tr class="track-row">
+                            <td class="col-index">{{ loop.index }}</td>
+                            <td class="col-title"><span class="song-title">{{ artista.nombre }}</span></td>
+                            <td class="col-album">{{ artista.total_canciones }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            {% else %}
+                <table class="track-table">
+                    <thead>
+                        <tr>
+                            <th class="col-index">#</th>
+                            <th class="col-title">Título</th>
+                            <th class="col-album">Reproducir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cancion in resultados %}
+                        <tr class="track-row">
+                            <td class="col-index">{{ loop.index }}</td>
+                            <td class="col-title">
+                                <div class="song-meta">
+                                    <span class="song-title">{{ cancion.nombre }}</span>
+                                    <span class="song-artist">{{ cancion.artista }}</span>
+                                </div>
+                            </td>
+                            <td class="col-album">
+                                <audio controls preload="none" {% if tipo == 'aleatorio' %}autoplay{% endif %}
+                                       src="{{ cancion.archivo_audio }}"></audio>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>
