@@ -66,12 +66,12 @@
                     <legend class="sr-only">Buscar por</legend>
                     <label class="tipo"><input type="radio" name="tipo" value="nombre" checked><span>Canciones</span></label>
                     <label class="tipo"><input type="radio" name="tipo" value="artista"><span>Artistas</span></label>
-                    <label class="tipo"><input type="radio" name="tipo" value="top_artistas"><span>Top artistas</span></label>
+                    <label class="tipo"><input type="radio" name="tipo" value="top"><span>Top artistas</span></label>
                 </fieldset>
 
                 <div>
                     <button type="submit" class="btn-buscar">Buscar</button>
-                    <button type="button" class="btn-buscar">aleatorio</button>
+                    <button type="submit" class="btn-buscar" formaction="{{url_for('random_song')}}" formnovalidate>Aleatorio</button>
                 </div>
             </form>
         </main>
