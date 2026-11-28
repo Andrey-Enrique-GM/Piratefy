@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión - Piratefy</title>
+    <title>Piratefy - Iniciar sesión</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/site/favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_login.css') }}">
 </head>
-
 <body>
     <!-- Barra superior (misma estructura que index.html) -->
     <header class="top-navbar">
         <div class="nav-left">
             <a href="/" class="brand-link">
-                <img src="{{ url_for('static', filename='images/site/piratefy_logo.png') }}" alt="Piratefy Logo"
-                    class="brand-logo-img">
-                <span class="brand-text">Piratefy</span>
+                <img src="{{ url_for('static', filename='images/site/piratefy_logo.png') }}" alt="Piratefy Logo" class="brand-logo-img">
+                <span class="brand-text">Pirate<span class="brand-fy">fy</span></span>
             </a>
         </div>
     </header>
 
     <!-- Contenedor principal -->
     <main class="signin-container">
-        <div class="signin-card">
+        <form class="signin-card" id="signin-form" novalidate>
             <img src="{{ url_for('static', filename='images/site/piratefy_logo.png') }}" alt="" class="signin-logo">
-            <h1 class="signin-title">Iniciar sesión </h1>
+            <h1 class="signin-title">Inicia sesión en Pirate<span class="brand-fy">fy</span></h1>
 
             <div class="signin-field">
                 <label for="user-email">Correo electrónico</label>
-                <input type="email" id="user-email" placeholder="tucorreo@ejemplo.com" autocomplete="email">
+                <input type="email" id="user-email" name="email" placeholder="tucorreo@ejemplo.com"
+                       autocomplete="email" required autofocus>
             </div>
 
             <div class="signin-field">
                 <label for="user-password">Contraseña</label>
-                <input type="password" id="user-password" placeholder="Contraseña" autocomplete="current-password">
+                <input type="password" id="user-password" name="password" placeholder="Contraseña"
+                       autocomplete="current-password" required>
             </div>
 
-            <button id="btn-signin" class="signin-btn">Iniciar sesión</button>
+            <button type="submit" id="btn-signin" class="signin-btn">Iniciar sesión</button>
 
             <div class="signin-divider"></div>
 
             <p class="signin-footer">
                 ¿No tienes cuenta?
-                <a href="#">Regístrate en Piratefy</a>
+                {# Pendiente: cambiar a url_for('signup') cuando exista la ruta #}
+                <a href="#">Regístrate en Pirate<span class="brand-fy">fy</span></a>
             </p>
-        </div>
+        </form>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ url_for('static', filename='js/signin.js') }}"></script>
 </body>
-
 </html>
